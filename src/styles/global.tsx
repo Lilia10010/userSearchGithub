@@ -3,17 +3,17 @@ import { createGlobalStyle } from "styled-components";
 const StyleGlobal = createGlobalStyle`
    @font-face {
     font-family: 'Bosch';
-    src: url('../assets/fonts/BoschSans-Regular.otf');
+    src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
   }
   * {
     margin: 0;
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
 
   }
   body {
-    height: 200vh;
     background: #0e1217;
   }
   body, html {
@@ -37,7 +37,7 @@ const StyleGlobal = createGlobalStyle`
     }
   }
   body, input, button {
-    font: 1rem Bosch, sans-serif;
+    font: 1rem 'Nunito', sans-serif;
   }
   #root {
    /*  width: 100%;
