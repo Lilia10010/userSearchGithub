@@ -18,10 +18,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Aplicação de buscar repositórios, branchs e commits de um usuário
 
-Baixe o repositório para ver rodando em localhost ou acesse os links abaixo para ter acesso ao deploy:
+Baixe o repositório para ver rodando em localhost ou acesse o link abaixo para ter acesso ao deploy:
 <br />
 
-[Aplicação](https://app-search-github.vercel.app/)
+[Aplicação](https://app-search-github-ic9f.vercel.app/)
 
 ### Após baixar o projeto instale as dependências:
 
