@@ -1,0 +1,9 @@
+import styled from "styled-components";
+
+export const FooterContainer = styled.footer`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+`;
