@@ -9,4 +9,5 @@ export const WrapperHome = styled.div`
   max-width: 600px;
   width: 100%;
   margin: 10px;
+  margin-bottom: 50px;
 `;

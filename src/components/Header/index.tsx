@@ -1,11 +1,12 @@
 import React from "react";
-import { Container, Logo, Icon } from "./styles";
+import { FiGithub } from "react-icons/fi";
+import { Container, Logo } from "./styles";
 
 const Header = () => {
   return (
     <Container>
       <Logo>SearchGithub</Logo>
-      <Icon>xxx</Icon>
+      <FiGithub size={30} />
     </Container>
   );
 };

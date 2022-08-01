@@ -20,7 +20,7 @@ export const WrapperCard = styled.div`
 
 export const InfoUser = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   gap: 15px;
   > div {
     display: flex;
