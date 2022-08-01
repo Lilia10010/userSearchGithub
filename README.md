@@ -21,7 +21,7 @@ Aplicação de buscar repositórios, branchs e commits de um usuário
 Baixe o repositório para ver rodando em localhost ou acesse os links abaixo para ter acesso ao deploy:
 <br />
 
-[Página de Login](https://user-search-steel.vercel.app/)
+[Página de Login](https://app-search-github.vercel.app/)
 
 ### Após baixar o projeto instale as dependências:
 
