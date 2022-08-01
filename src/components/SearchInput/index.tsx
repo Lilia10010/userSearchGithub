@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getUserData } from "../../services/sessions";
-import { getBranch } from "../../services/sessions";
+import { getLinting } from "../../services/sessions";
 
 import CardDetailsUser from "../../components/CardDetailsUser";
 import CardDetailsRepos from "../../components/CardDetailsRepos";
+import CardDetailsBranches from "../../components/CardDetailsBranches";
+import CardDetailsCommits from "../../components/CardDetailsCommits";
+import Loading from "../../components/Loading";
 
 import { TbUserSearch } from "react-icons/tb";
 import {
@@ -13,16 +16,19 @@ import {
   Input,
   Button,
   WrapperCards,
+  CardInitial,
+  UserNotFound,
 } from "./styles";
+import { FiGithub } from "react-icons/fi";
 
 const SearchInput = () => {
   const [valueInput, setValueInput] = useState("");
   const [user, setUser] = useState({});
   const [repoName, setRepoName] = useState("");
-  const [listBranch, setlistBranch] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [listing, setListing] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [showRepo, setShowRepo] = useState(true);
+  const [listingShow, setLintingShow] = useState("");
   const [showError, setShowError] = useState(false);
 
   const handlerInputSearch = (e: any) => {
@@ -33,10 +39,13 @@ const SearchInput = () => {
       .then((response) => {
         if (response === undefined) {
           setShowError(true);
+          setLintingShow("");
+          setLoading(false);
         } else {
           setUser({ response });
           setShowError(false);
           setLoading(false);
+          setLintingShow("repo");
         }
       })
       .catch((err) => {
@@ -45,73 +54,81 @@ const SearchInput = () => {
         setShowError(true);
       });
   };
-  const handleBranch = (e: any) => {
-    /* setLoading(true);
-    setShowError(false); */
+  const handleListing = (e: any, listParam: string) => {
+    setLoading(true);
     setRepoName(e);
+    setLintingShow(listParam);
 
-    getBranch(valueInput, e)
+    getLinting(valueInput, e, listParam)
       .then((response) => {
-        setlistBranch(response.data);
-        setShowRepo(false);
-
-        /* setShowError(false);
-        setLoading(false); */
+        setListing(response.data);
+        setLoading(false);
+        setShowError(false);
       })
       .catch((err) => {
         console.log("error branch", err);
-        /* setLoading(false);
-        setShowError(true); */
+        setLoading(false);
+        setShowError(true);
       });
   };
-
-  useEffect(() => {
-    console.log("listBranch", listBranch);
-  }, [listBranch]);
   return (
     <>
       <Container>
         <WrapperSearch onSubmit={(e) => handlerInputSearch(e)}>
           <TbUserSearch style={{ fontSize: "30px", color: "#ce3df3" }} />
           <Input
-            placeholder="Nome do usuário"
+            minLength={3}
+            placeholder="insira username do usuário"
             onChange={(e) => setValueInput(e.target.value)}
           />
           <Button type="submit">Pesquisar</Button>
         </WrapperSearch>
       </Container>
-      {showError ? (
-        "ops"
+      {loading ? (
+        <Loading />
+      ) : showError ? (
+        <UserNotFound>
+          <div className="ops">ops...</div>
+          <div>usuário não encontrado, verifique o nome e tente novamente.</div>
+        </UserNotFound>
       ) : (
         <>
-          {!loading ? (
+          {listingShow ? (
             <WrapperCards>
               <CardDetailsUser dataUser={user} />
               <CardDescription>
-                {showRepo && (
+                {listingShow === "repo" && (
                   <CardDetailsRepos
                     dataUser={user}
                     dataBrach={(e: any) => {
-                      handleBranch(e);
+                      handleListing(e, "branches");
                     }}
                   />
                 )}
-                {listBranch && (
+
+                {listingShow === "branches" && (
+                  <CardDetailsBranches
+                    dataUser={listing}
+                    dataBrach={() => {
+                      handleListing(repoName, "commits");
+                    }}
+                  />
+                )}
+
+                {listingShow === "commits" && (
                   <>
-                    <span>{repoName}</span>
-                    {listBranch.map((value: any, index: any) => (
-                      <>
-                        <div key={index}>{value.name}</div>
-                      </>
-                    ))}
+                    <div>
+                      <CardDetailsCommits dataUser={listing} />
+                    </div>
                   </>
                 )}
               </CardDescription>
             </WrapperCards>
           ) : (
-            <>
-              <span>antes de pesquisar</span>
-            </>
+            <CardInitial>
+              {" "}
+              <FiGithub />{" "}
+            </CardInitial>
           )}
         </>
       )}

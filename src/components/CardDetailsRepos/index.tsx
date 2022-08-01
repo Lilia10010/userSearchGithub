@@ -1,6 +1,6 @@
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import { TbHandClick } from "react-icons/tb";
-import { Container, LinkRepo } from "./styles";
+import { Container, LinkRepo, Title } from "./styles";
 
 interface ReposProps {
   dataUser: any;
@@ -12,16 +12,26 @@ const CardDetailsRepos = ({ dataUser, dataBrach }: ReposProps) => {
 
   return (
     <Container>
-      {repos.map((value: any, index: any) => (
-        <LinkRepo
-          key={index}
-          onClick={() => {
-            dataBrach(value.name);
-          }}
-        >
-          {value.name} <TbHandClick />
-        </LinkRepo>
-      ))}
+      {repos.length > 0 ? (
+        <>
+          <Title>Clique no repositório para listar suas branches</Title>
+          {repos.map((value: any, index: any) => (
+            <LinkRepo
+              key={index}
+              onClick={() => {
+                dataBrach(value.name);
+              }}
+            >
+              <strong>repo: </strong>
+              {value.name}
+
+              <TbHandClick />
+            </LinkRepo>
+          ))}
+        </>
+      ) : (
+        <Title>Nada para ser listado deste repositório</Title>
+      )}
     </Container>
   );
 };

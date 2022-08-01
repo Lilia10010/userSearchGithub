@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const StyleGlobal = createGlobalStyle`
    @font-face {
-    font-family: 'Bosch';
+    font-family: 'Nunito';
     src: url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
   }
   * {
@@ -15,6 +15,10 @@ const StyleGlobal = createGlobalStyle`
   }
   body {
     background: #0e1217;
+    position: relative;
+  }
+  .App{
+     min-height: 100vh;
   }
   body, html {
     scroll-behavior: smooth;

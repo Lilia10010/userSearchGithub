@@ -10,9 +10,12 @@ export const getRepos = async (userName = {}) => {
   return response;
 };
 
-export const getBranch = async (userName: string, repoName: string) => {
-  console.log("ççççç", userName);
-  const response = await api.get(`/repos/${userName}/${repoName}/branches`);
+export const getLinting = async (
+  userName: string,
+  repoName: string,
+  listParam: string
+) => {
+  const response = await api.get(`/repos/${userName}/${repoName}/${listParam}`);
   return response;
 };
 

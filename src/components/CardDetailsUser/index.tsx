@@ -20,14 +20,16 @@ const CardDetailsUser = ({ dataUser }: UserProps) => {
               <FiGithub />
               {user.login}
             </div>
-            <div className="bio">bio: {user.bio}</div>
+            {user.bio && <div className="bio">bio: {user.bio}</div>}
           </div>
         </InfoUser>
         <InFoOther>
-          <div className="location">
-            <GoLocation />
-            {user.location}
-          </div>
+          {user.location && (
+            <div className="location">
+              <GoLocation />
+              {user.location}
+            </div>
+          )}
           <div>repos: {repos.length}</div>
         </InFoOther>
       </WrapperCard>
